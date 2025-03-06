@@ -1,0 +1,30 @@
+# Node modules
+node_modules/
+
+# Dependências do ambiente local
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# Arquivos de logs
+*.log
+
+# Diretórios de build ou distribuições
+dist/
+build/
+
+# Arquivos de ambiente
+.env
+
+# Arquivos de cache
+.cache/
+
+# Arquivos do IDE (como VSCode)
+.vscode/
+
+# Outros arquivos temporários ou desnecessários
+.DS_Store    # Para sistemas macOS
+Thumbs.db    # Para sistemas Windows
+
+# Diretórios de testes
+coverage/
