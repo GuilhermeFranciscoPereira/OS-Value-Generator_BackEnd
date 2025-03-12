@@ -7,67 +7,69 @@ class OSController {
             const dataResult = await OSrepositories.findAll();
             res.status(200).json(dataResult)
         } catch (error) {
-            res.status(500).json({ message: `Erro ao buscar todas as OS: ${error}` });
+            res.status(500).json({ message: `Erro ao buscar todas as OS: ${error.message}` });
         }
     }
 
     // GET BY ID
     async showById(req, res) {
-        const { id } = req.params;
+        const { idGet } = req.params;
 
         try {
-            const query = await OSrepositories.findById(id);
+            const query = await OSrepositories.findById(idGet);
             res.status(200).json(query);
         } catch (error) {
-            res.status(500).json({ message: `Erro ao buscar a OS: ${error}` });
+            res.status(500).json({ message: `Erro ao buscar a OS: ${error.message}` });
+        }
+    }
+
+    // GET BY CLIENT NAME
+    async showByClientName(req, res) {
+        const { clientName } = req.params;
+        try {
+            const query = await OSrepositories.findByPlate(clientName);
+            res.status(200).json(query);
+        } catch (error) {
+            res.status(500).json({ message: `Erro ao buscar este nome: ${error.message}` });
         }
     }
 
     // POST
     async store(req, res) {
-        let { clientName, employees, osValue } = req.body;
-
-        if (!clientName) { return res.status(400).json({ message: 'Campo obrigatório faltando: Nome do cliente' }) }
-        else if (!employees) { return res.status(400).json({ message: 'Campo obrigatório faltando: Funcionários' }) }
-        else if (!osValue) { return res.status(400).json({ message: 'Campo obrigatório faltando: Valor da OS' }) };
-
-        const allDatas = [clientName, employees, osValue];
+        const { employees, clientName, osValue, degreeOfRisk, materialsValue, totalKM, employeesValue } = req.body;
+        const allDatas = [employees, clientName, osValue, degreeOfRisk, materialsValue, totalKM, employeesValue];
 
         try {
             await OSrepositories.create(allDatas);
             res.status(201).json({ message: 'OS cadastrada com sucesso!' });
         } catch (error) {
-            res.status(500).json({ message: `Erro ao cadastrar nova OS: ${error}` });
+            console.log(`ERRO: ${error.message}`)
+            res.status(500).json({ message: `Erro ao cadastrar nova OS: ${error.message}` });
         }
     }
 
     // PATCH TO UPDATE FIELDS
     async update(req, res) {
         const { id } = req.params;
-        let { clientName, employees, osValue } = req.body;
-
-        if (!clientName) { return res.status(400).json({ message: 'Campo obrigatório faltando: Nome do cliente' }) }
-        else if (!employees) { return res.status(400).json({ message: 'Campo obrigatório faltando: Funcionários' }) }
-        else if (!osValue) { return res.status(400).json({ message: 'Campo obrigatório faltando: Valor da OS' }) };
-
-        const allDatas = [clientName, employees, osValue];
+        const { employees, clientName, osValue, degreeOfRisk, materialsValue, totalKM, employeesValue } = req.body;
+        const allDatas = [employees, clientName, osValue, degreeOfRisk, materialsValue, totalKM, employeesValue];
 
         try {
             await OSrepositories.updateById(id, allDatas);
             res.status(200).json({ message: 'OS atualizada com sucesso!' });
         } catch (error) {
-            res.status(500).json({ message: `Erro ao atualizar OS: ${error}` });
+            res.status(500).json({ message: `Erro ao atualizar OS: ${error.message}` });
         }
     }
 
     // DELETE A OS
     async delete(req, res) {
-        const { id } = req.params;
+        const { idDelete } = req.params;
         try {
-            await OSrepositories.deleteById(id);
+            await OSrepositories.deleteById(idDelete);
             res.status(200).json({ message: 'OS deletada com sucesso!' });
         } catch (error) {
-            res.status(500).json({ message: `Erro ao deletar a OS: ${error}` });
+            res.status(500).json({ message: `Erro ao deletar a OS: ${error.message}` });
         }
     }
 }

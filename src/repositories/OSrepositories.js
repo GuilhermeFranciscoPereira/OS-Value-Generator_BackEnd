@@ -13,15 +13,21 @@ class OSRepository {
         return databaseQuery(sqlMethod, id)
     }
 
+    // GET BY CLIENT NAME
+    findByPlate(clientName) {
+        const sqlMethod = "SELECT * FROM os_value_table WHERE clientName REGEXP ?"
+        return databaseQuery(sqlMethod, clientName)
+    }
+
     // POST
     create(allDatas) {
-        const sqlMethod = 'INSERT INTO os_value_table (clientName, employees, osValue) VALUES (?, ?, ?)';
+        const sqlMethod = 'INSERT INTO os_value_table (employees, clientName, osValue, degreeOfRisk, materialsValue, totalKM, employeesValue) VALUES (?, ?, ?, ?, ?, ?, ?)';
         return databaseQuery(sqlMethod, allDatas);
     }
 
     // PATCH TO UPDATE FIELDS
     async updateById(id, allDatas) {
-        const columnNames = ["clientName", "employees", "osValue"];
+        const columnNames = ["employees", "clientName", "osValue", "degreeOfRisk", "materialsValue", "totalKM", "employeesValue"];
         const sqlMethod = `UPDATE os_value_table SET ${columnNames.map((field) => `${field} = ?`).join(', ')} WHERE id = ?`;
         const values = Object.values(allDatas);
         const queryValues = [...values, id];

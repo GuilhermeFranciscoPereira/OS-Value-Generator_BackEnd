@@ -5,7 +5,8 @@ const router = Router();
 
 // GET
 router.get('/allOS', OScontroller.index); // To show all plates
-router.post('/allOS/ID/:idGet', OScontroller.showById); // Find by the ID
+router.get('/allOS/id/:idGet', OScontroller.showById); // Find by the ID
+router.get('/allOS/:clientName', OScontroller.showByClientName) // To search with a client name and show the all OS with the name
 // POST
 router.post('/allOS', OScontroller.store); // Create new OS
 // PATCH
