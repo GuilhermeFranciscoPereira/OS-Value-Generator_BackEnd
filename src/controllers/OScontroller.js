@@ -36,8 +36,8 @@ class OSController {
 
     // POST
     async store(req, res) {
-        const { employees, clientName, osValue, degreeOfRisk, materialsValue, totalKM, employeesValue } = req.body;
-        const allDatas = [employees, clientName, osValue, degreeOfRisk, materialsValue, totalKM, employeesValue];
+        const { employees, clientName, fullOsValue, degreeOfRisk, materialsValue, fullKM, workedTime, employeesValue } = req.body;
+        const allDatas = [employees, clientName, fullOsValue, degreeOfRisk, materialsValue, fullKM, workedTime, employeesValue];
 
         try {
             await OSrepositories.create(allDatas);
@@ -50,12 +50,12 @@ class OSController {
 
     // PATCH TO UPDATE FIELDS
     async update(req, res) {
-        const { id } = req.params;
-        const { employees, clientName, osValue, degreeOfRisk, materialsValue, totalKM, employeesValue } = req.body;
-        const allDatas = [employees, clientName, osValue, degreeOfRisk, materialsValue, totalKM, employeesValue];
+        const { idPatch } = req.params;
+        const { employees, clientName, fullOsValue, degreeOfRisk, materialsValue, fullKM, workedTime, employeesValue } = req.body;
+        const allDatas = [employees, clientName, fullOsValue, degreeOfRisk, materialsValue, fullKM, workedTime, employeesValue];
 
         try {
-            await OSrepositories.updateById(id, allDatas);
+            await OSrepositories.updateById(idPatch, allDatas);
             res.status(200).json({ message: 'OS atualizada com sucesso!' });
         } catch (error) {
             res.status(500).json({ message: `Erro ao atualizar OS: ${error.message}` });

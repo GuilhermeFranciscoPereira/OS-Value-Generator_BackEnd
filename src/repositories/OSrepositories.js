@@ -21,13 +21,13 @@ class OSRepository {
 
     // POST
     create(allDatas) {
-        const sqlMethod = 'INSERT INTO os_value_table (employees, clientName, osValue, degreeOfRisk, materialsValue, totalKM, employeesValue) VALUES (?, ?, ?, ?, ?, ?, ?)';
+        const sqlMethod = 'INSERT INTO os_value_table (employees, clientName, fullOsValue, degreeOfRisk, materialsValue, fullKM, workedTime, employeesValue) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
         return databaseQuery(sqlMethod, allDatas);
     }
 
     // PATCH TO UPDATE FIELDS
     async updateById(id, allDatas) {
-        const columnNames = ["employees", "clientName", "osValue", "degreeOfRisk", "materialsValue", "totalKM", "employeesValue"];
+        const columnNames = ["employees", "clientName", "fullOsValue", "degreeOfRisk", "materialsValue", "fullKM", "workedTime", "employeesValue"];
         const sqlMethod = `UPDATE os_value_table SET ${columnNames.map((field) => `${field} = ?`).join(', ')} WHERE id = ?`;
         const values = Object.values(allDatas);
         const queryValues = [...values, id];
