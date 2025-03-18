@@ -7,6 +7,12 @@ class OSRepository {
         return databaseQuery(sqlMethod);
     }
 
+    // GET ALL PER PAGE
+    findPerPage(page) {
+        const sqlMethod = "SELECT * FROM os_value_table ORDER BY id DESC LIMIT 6 OFFSET ?";
+        return databaseQuery(sqlMethod, page);
+    }
+
     // GET BY ID
     findById(id) {
         const sqlMethod = "SELECT * FROM os_value_table WHERE id = ?"

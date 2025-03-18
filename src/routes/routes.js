@@ -4,7 +4,8 @@ import { Router } from "express";
 const router = Router();
 
 // GET
-router.get('/allOS', OScontroller.index); // To show all plates
+router.get('/allOS', OScontroller.index); // To show all plates ( with limit per page )
+router.get('/allOS/osPerPage/:page', OScontroller.showByPage); // To show all plates ( with limit per page )
 router.get('/allOS/id/:idGet', OScontroller.showById); // Find by the ID
 router.get('/allOS/:clientName', OScontroller.showByClientName) // To search with a client name and show the all OS with the name
 // POST

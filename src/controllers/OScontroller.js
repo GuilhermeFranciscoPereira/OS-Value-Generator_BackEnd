@@ -11,6 +11,18 @@ class OSController {
         }
     }
 
+    async showByPage(req, res) {
+        const { page } = req.params;
+        const offset = (page - 1) * 6;
+    
+        try {
+            const dataResult = await OSrepositories.findPerPage(offset);
+            res.status(200).json(dataResult);
+        } catch (error) {
+            res.status(500).json({ message: `Erro ao buscar OS por página: ${error.message}` });
+        }
+    }
+    
     // GET BY ID
     async showById(req, res) {
         const { idGet } = req.params;
