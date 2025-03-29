@@ -48,8 +48,8 @@ class OSController {
 
     // POST
     async store(req, res) {
-        const { employees, clientName, fullOsValue, degreeOfRisk, materialsValue, fullKM, workedTime, employeesValue } = req.body;
-        const allDatas = [employees, clientName, fullOsValue, degreeOfRisk, materialsValue, fullKM, workedTime, employeesValue];
+        const { employees, clientName, fullOsValue, toll, feeding, accommodation, degreeOfRisk, materialsValue, fullKM, workedTime, employeesValue } = req.body;
+        const allDatas = [employees, clientName, fullOsValue, toll, feeding, accommodation, degreeOfRisk, materialsValue, fullKM, workedTime, employeesValue];
 
         try {
             await OSrepositories.create(allDatas);
@@ -63,8 +63,8 @@ class OSController {
     // PATCH TO UPDATE FIELDS
     async update(req, res) {
         const { idPatch } = req.params;
-        const { employees, clientName, fullOsValue, degreeOfRisk, materialsValue, fullKM, workedTime, employeesValue } = req.body;
-        const allDatas = [employees, clientName, fullOsValue, degreeOfRisk, materialsValue, fullKM, workedTime, employeesValue];
+        const { employees, clientName, fullOsValue, toll, feeding, accommodation, degreeOfRisk, materialsValue, fullKM, workedTime, employeesValue } = req.body;
+        const allDatas = [employees, clientName, fullOsValue, toll, feeding, accommodation, degreeOfRisk, materialsValue, fullKM, workedTime, employeesValue];
 
         try {
             await OSrepositories.updateById(idPatch, allDatas);
